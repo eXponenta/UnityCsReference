@@ -331,7 +331,11 @@ namespace UnityEngine.Networking
         {
             if (multipartFormSections == null || multipartFormSections.Count == 0)
                 return null;
-
+            
+            //otherwise throw ArgumentNullException in line 378 and 388
+            if(boundary == null)
+                boundary = GenerateBoundary();
+            
             byte[] crlf = System.Text.Encoding.UTF8.GetBytes("\r\n");
             byte[] dDash = WWWForm.DefaultEncoding.GetBytes("--");
 
